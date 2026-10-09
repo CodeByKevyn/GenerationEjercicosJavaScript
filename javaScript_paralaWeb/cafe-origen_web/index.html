@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Origen | Café de especialidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+   
+</head>
+<body>
+    <header class="encabezado">
+        <a class="marca" href="#inicio">Café Origen</a>
+        <nav>
+            <a href="#carta">Carta</a>
+            <a href="#origen">Nuestro origen</a>
+            <a href="#visitanos">Visítanos</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Portada: lo primero que ve el cliente -->
+        <section id="inicio" class="portada">
+            <p id="estado" class="estado">Consultando horario...</p>
+            <h1>Café de origen, servido con calma.</h1>
+            <p class="intro">
+                Tostamos granos de <strong>Huila</strong> y <strong>Nariño</strong> cada semana
+                y los preparamos frente a ti, <em>sin afanes</em>.
+            </p>
+            <a class="boton" href="#carta">Ver la carta</a>
+            <img
+                class="foto"
+                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80"
+                alt="Dos personas brindan con capuchinos con arte latte sobre una mesa de madera"
+            >
+        </section>
+
+        <!-- Carta: JavaScript la llena con los productos -->
+        <section id="carta" class="carta">
+            <h2>La carta de hoy</h2>
+            <ul id="menu" class="menu"></ul>
+        </section>
+
+        <section id="origen" class="origen">
+            <h2>Nuestro origen</h2>
+            <p>
+                Compramos directamente a familias caficultoras. Cada bolsa dice de qué finca
+                viene, a qué altura se cultivó y quién la cosechó.
+            </p>
+        </section>
+    </main>
+
+    <footer id="visitanos" class="pie">
+        <address>
+            Carrera 7 # 45-12, Bogotá<br>
+            Lunes a sábado, de 7:00 a. m. a 7:00 p. m.
+        </address>
+        <small>© 2026 Café Origen. Proyecto de clase.</small>
+    </footer>
+     <script src="app.js" defer></script>
+</body>
+</html>

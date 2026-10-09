@@ -1,0 +1,204 @@
+/* ===== 1. Variables: la paleta de la marca ===== */
+:root { /* Elemento raíz (<html>); permite definir variables globales accesibles en todo el CSS */
+    --cafetal: #1F3D30; /* Guarda el color verde oscuro con el nombre --cafetal */
+    --cereza: #B0342A; /* Guarda el color rojo con el nombre --cereza */
+    --tueste: #2B201B; /* Guarda el color café/marrón oscuro con el nombre --tueste */
+    --gris: #6E655F; /* Guarda el color gris con el nombre --gris */
+    --hoja: #E4ECE5; /* Guarda el color verde claro/suave con el nombre --hoja */
+    --rubor: #F6E3E0; /* Guarda el color rosa claro con el nombre --rubor */
+    --niebla: #F2F1EF; /* Guarda el color gris muy claro/blanquecino con el nombre --niebla */
+    --blanco: #FFFFFF; /* Guarda el color blanco puro con el nombre --blanco */
+    --fuente-titulos: "Young Serif", Georgia, serif; /* Define la lista de fuentes tipográficas para títulos */
+    --fuente-texto: "Figtree", Arial, sans-serif; /* Define la lista de fuentes tipográficas para el texto general */
+}
+
+/* ===== 2. Base: reglas para toda la página ===== */
+body { /* Selecciona el cuerpo de la página para aplicar estilos globales */
+    margin: 0; /* Quita el margen exterior predeterminado del navegador */
+    background-color: var(--blanco); /* Establece el fondo de la página en blanco usando la variable */
+    color: var(--tueste); /* Define el color del texto general usando el tono café oscuro */
+    font-family: var(--fuente-texto); /* Aplica la tipografía Figtree / Arial al contenido */
+    font-size: 1.125rem; /* Define el tamaño de letra base (18px) */
+    line-height: 1.6; /* Establece el interlineado a 1.6 veces el tamaño del texto */
+}
+
+h1, /* Selecciona los títulos nivel 1 */
+h2, /* Selecciona los títulos nivel 2 */
+h3 { /* Selecciona los títulos nivel 3 */
+    font-family: var(--fuente-titulos); /* Aplica la tipografía "Young Serif" a los tres niveles de títulos */
+    font-weight: 400; /* Define el grosor de la letra como regular/normal */
+    line-height: 1.15; /* Reduce el interlineado de los títulos para mantenerlos compactos */
+    color: var(--cafetal); /* Cambia el color del texto de los títulos a verde oscuro */
+}
+
+.encabezado, /* Selecciona los elementos con clase="encabezado" */
+main, /* Selecciona la etiqueta principal <main> */
+.pie { /* Selecciona los elementos con clase="pie" */
+    max-width: 44rem; /* Establece un ancho máximo de contenedor (704px) */
+    margin: 0 auto; /* Centra los contenedores horizontalmente en la pantalla */
+    padding-left: 1.25rem; /* Añade un espacio interno a la izquierda (20px) */
+    padding-right: 1.25rem; /* Añade un espacio interno a la derecha (20px) */
+}
+
+a:focus-visible { /* Selecciona los enlaces (<a>) enfocados mediante navegación por teclado (Tab) */
+    outline: 3px solid var(--cereza); /* Dibuja un borde exterior de 3px en rojo cereza */
+    outline-offset: 3px; /* Separa el borde del elemento 3px para resaltar la accesibilidad */
+}
+
+/* ===== 3. Encabezado y navegación ===== */
+.encabezado {
+    padding-top: 1.5rem; /* Agrega un espacio interno superior de 24px al encabezado */
+}
+
+.marca {
+    font-family: var(--fuente-titulos); /* Aplica la fuente estilizada de títulos al nombre de la marca */
+    font-size: 1.5rem; /* Define el tamaño de letra de la marca (24px) */
+    color: var(--cafetal); /* Establece el color en verde oscuro */
+    text-decoration: none; /* Elimina el subrayado por defecto del enlace */
+}
+
+nav {
+    margin-top: 0.25rem; /* Añade un pequeño margen superior de 4px para separarlo de la marca */
+}
+
+nav a {
+    margin-right: 1.25rem; /* Separa los enlaces del menú entre sí hacia la derecha (20px) */
+    color: var(--tueste); /* Asigna el color café oscuro a los enlaces del menú */
+    font-size: 1rem; /* Tamaño de letra de 16px */
+    font-weight: 600; /* Aplica un grosor seminegrita para destacar las opciones */
+    text-decoration: none; /* Quita el subrayado a los enlaces de navegación */
+}
+
+nav a:hover {
+    color: var(--cereza); /* Cambia el color al rojo cereza al pasar el cursor encima */
+    text-decoration: underline; /* Muestra un subrayado al pasar el cursor */
+}
+
+/* ===== 4. Portada ===== */
+.portada {
+    padding-top: 3rem; /* Espacio interno superior de 48px */
+    padding-bottom: 3.5rem; /* Espacio interno inferior de 56px */
+}
+
+.estado {
+    display: inline-block; /* Permite aplicar dimensiones y rellenos sin romper el flujo de texto */
+    margin: 0; /* Elimina márgenes exteriores */
+    padding: 0.25rem 0.875rem; /* Crea un relleno interno (4px arriba/abajo, 14px lados) */
+    border-radius: 999px; /* Curva totalmente los bordes para crear una píldora/etiqueta redonda */
+    background-color: var(--niebla); /* Fondo gris claro blanquecino */
+    color: var(--gris); /* Texto en color gris */
+    font-size: 0.9375rem; /* Tamaño de texto de 15px */
+    font-weight: 600; /* Texto seminegrita */
+}
+
+h1 {
+    margin: 1.25rem 0 1rem; /* Margen: 20px arriba, 0 en los lados, 16px abajo */
+    font-size: 3rem; /* Tamaño de título principal muy grande (48px) */
+}
+
+.intro {
+    max-width: 34rem; /* Limita el ancho del texto introductorio (544px) para facilitar la lectura */
+    margin: 0 0 2rem; /* Margen de 32px únicamente en la parte inferior */
+    font-size: 1.25rem; /* Tamaño de fuente ligeramente más grande (20px) */
+}
+
+.boton {
+    display: inline-block; /* Convierte el enlace en un bloque con dimensiones para parecer un botón */
+    padding: 0.75rem 1.5rem; /* Espaciado interno (12px arriba/abajo, 24px lados) */
+    border-radius: 999px; /* Bordes redondeados en forma de píldora */
+    background-color: var(--cereza); /* Fondo rojo cereza */
+    color: var(--blanco); /* Texto en blanco */
+    font-weight: 600; /* Texto en seminegrita */
+    text-decoration: none; /* Quita el subrayado del enlace */
+}
+
+.boton:hover {
+    background-color: var(--cafetal); /* Cambia el fondo del botón a verde oscuro al pasar el cursor */
+}
+
+.foto {
+    display: block; /* Comporta la imagen como un bloque completo */
+    width: 100%; /* Ocupa todo el ancho disponible del contenedor */
+    height: 22rem; /* Define una altura fija de 352px */
+    margin-top: 2.5rem; /* Espacio de 40px por encima de la imagen */
+    border-radius: 1.5rem; /* Esquinas redondeadas (24px) */
+    object-fit: cover; /* Ajusta la imagen para que recorte y cubra el área sin deformarse */
+}
+
+/* ===== 5. Carta ===== */
+.carta {
+    padding-bottom: 3rem; /* Espaciado inferior de 48px */
+}
+
+h2 {
+    margin: 0 0 1rem; /* Margen inferior de 16px */
+    font-size: 2rem; /* Tamaño de título de sección (32px) */
+}
+
+#menu {
+    margin: 0; /* Quita el margen por defecto de la lista `<ul>` */
+    padding: 0; /* Quita el sangrado o relleno izquierdo por defecto de la lista */
+    list-style: none; /* Elimina las viñetas (puntos) de la lista */
+}
+
+.producto {
+    padding: 1.25rem 0; /* Espaciado de 20px arriba y abajo para cada ítem */
+    border-bottom: 1px solid var(--hoja); /* Línea divisoria inferior de color verde claro */
+}
+
+.producto h3 {
+    margin: 0; /* Elimina márgenes extra en el nombre del producto */
+    font-size: 1.375rem; /* Tamaño de letra de 22px */
+}
+
+.producto p {
+    margin: 0.25rem 0 0.5rem; /* Margen: 4px arriba, 0 lados, 8px abajo */
+    color: var(--gris); /* Texto descriptivo del producto en color gris */
+}
+
+.precio {
+    color: var(--cereza); /* Texto del precio en color rojo cereza */
+    font-weight: 700; /* Texto en negrita resaltada */
+}
+
+/* ===== 6. Nuestro origen ===== */
+.origen {
+    margin-bottom: 3rem; /* Margen inferior de 48px para separarlo de la siguiente sección */
+    padding: 2.5rem 2rem; /* Espaciado interno de 40px arriba/abajo y 32px a los lados */
+    border-radius: 1.5rem; /* Bordes suavemente redondeados (24px) */
+    background-color: var(--cafetal); /* Fondo completo verde oscuro */
+    color: var(--hoja); /* Texto en tono verde claro muy suave */
+}
+
+.origen h2 {
+    color: var(--blanco); /* Cambia el título dentro de esta caja oscura a blanco puro */
+}
+
+.origen p {
+    margin: 0; /* Elimina los márgenes del párrafo */
+    font-size: 1.25rem; /* Aumenta la letra a 20px para darle mayor impacto visual */
+}
+
+/* ===== 7. Pie de página ===== */
+.pie {
+    padding-top: 2rem; /* Espaciado superior de 32px */
+    padding-bottom: 3rem; /* Espaciado inferior de 48px */
+    color: var(--gris); /* Texto en tono gris */
+    font-size: 1rem; /* Tamaño de letra estándar (16px) */
+}
+
+address {
+    margin-bottom: 0.75rem; /* Separa la dirección del elemento siguiente por 12px */
+    font-style: normal; /* Quita la cursiva/itálica que aplica la etiqueta <address> por defecto */
+}
+
+/* ===== 8. Estados que JavaScript activa ===== */
+.abierto {
+    background-color: var(--hoja);
+    color: var(--cafetal);
+}
+
+.cerrado {
+    background-color: var(--rubor);
+    color: var(--cereza);
+}
