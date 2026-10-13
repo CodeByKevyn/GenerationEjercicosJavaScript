@@ -1,0 +1,419 @@
+/* ===== 1. Variables: la paleta de la marca ===== */
+:root {
+    --cafetal: #1F3D30;
+    --cereza: #B0342A;
+    --tueste: #2B201B;
+    --gris: #6E655F;
+    --hoja: #E4ECE5;
+    --rubor: #F6E3E0;
+    --niebla: #F2F1EF;
+    --blanco: #FFFFFF;
+    --fuente-titulos: "Young Serif", Georgia, serif;
+    --fuente-texto: "Figtree", Arial, sans-serif;
+}
+
+/* ===== 2. Base: reglas para toda la página ===== */
+body {
+    margin: 0;
+    background-color: var(--blanco);
+    color: var(--tueste);
+    font-family: var(--fuente-texto);
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--fuente-titulos);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--cafetal);
+}
+
+.encabezado,
+main,
+.pie {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--cereza);
+    outline-offset: 3px;
+}
+
+/* ===== 3. Encabezado y navegación ===== */
+.encabezado {
+    padding-top: 1.5rem;
+}
+
+.marca {
+    font-family: var(--fuente-titulos);
+    font-size: 1.5rem;
+    color: var(--cafetal);
+    text-decoration: none;
+}
+
+nav {
+    margin-top: 0.25rem;
+}
+
+nav a {
+    margin-right: 1.25rem;
+    color: var(--tueste);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--cereza);
+    text-decoration: underline;
+}
+
+/* ===== 4. Portada ===== */
+.portada {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+}
+
+.estado {
+    display: inline-block;
+    margin: 0;
+    padding: 0.25rem 0.875rem;
+    border-radius: 999px;
+    background-color: var(--niebla);
+    color: var(--gris);
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+h1 {
+    margin: 1.25rem 0 1rem;
+    font-size: 3rem;
+}
+
+.intro {
+    max-width: 34rem;
+    margin: 0 0 2rem;
+    font-size: 1.25rem;
+}
+
+.boton {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    background-color: var(--cereza);
+    color: var(--blanco);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.boton:hover {
+    background-color: var(--cafetal);
+}
+
+.foto {
+    display: block;
+    width: 100%;
+    height: 22rem;
+    margin-top: 2.5rem;
+    border-radius: 1.5rem;
+    object-fit: cover;
+}
+
+/* ===== 5. Carta ===== */
+.carta {
+    padding-bottom: 3rem;
+}
+
+h2 {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+}
+
+#menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.producto {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--hoja);
+}
+
+.producto h3 {
+    margin: 0;
+    font-size: 1.375rem;
+}
+
+.producto p {
+    margin: 0.25rem 0 0.5rem;
+    color: var(--gris);
+}
+
+.precio {
+    color: var(--cereza);
+    font-weight: 700;
+}
+
+/* ===== 6. Nuestro origen ===== */
+.origen {
+    margin-bottom: 3rem;
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+    background-color: var(--cafetal);
+    color: var(--hoja);
+}
+
+.origen h2 {
+    color: var(--blanco);
+}
+
+.origen p {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+/* ===== 7. Pie de página ===== */
+.pie {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    color: var(--gris);
+    font-size: 1rem;
+}
+
+address {
+    margin-bottom: 0.75rem;
+    font-style: normal;
+}
+
+/* ===== 8. Estados que JavaScript activa ===== */
+.abierto {
+    background-color: var(--hoja);
+    color: var(--cafetal);
+}
+
+.cerrado {
+    background-color: var(--rubor);
+    color: var(--cereza);
+}
+
+/* ===== 9. Botones y encabezado fijo ===== */
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+button:focus-visible {
+    outline: 3px solid var(--cereza);
+    outline-offset: 3px;
+}
+
+.boton {
+    border: none;
+    font-size: 1.125rem;
+}
+
+.encabezado {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding-bottom: 0.75rem;
+    background-color: var(--blanco);
+}
+
+nav a {
+    white-space: nowrap;
+}
+
+section {
+    scroll-margin-top: 6rem;
+}
+
+.contador {
+    display: inline-block;
+    min-width: 1.5rem;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    background-color: var(--cereza);
+    color: var(--blanco);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* ===== 10. Carta interactiva ===== */
+.vistas {
+    margin: 0 0 0.5rem;
+}
+
+.vista {
+    margin-right: 0.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--hoja);
+    border-radius: 999px;
+    background-color: var(--blanco);
+    color: var(--tueste);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.vista.activa {
+    border-color: var(--cafetal);
+    background-color: var(--cafetal);
+    color: var(--blanco);
+}
+
+.producto {
+    position: relative;
+}
+
+.producto h3 {
+    padding-right: 3rem;
+}
+
+.agregar {
+    margin-left: 1rem;
+    padding: 0.35rem 1rem;
+    border: 1px solid var(--cereza);
+    border-radius: 999px;
+    background-color: var(--blanco);
+    color: var(--cereza);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.agregar:hover {
+    background-color: var(--cereza);
+    color: var(--blanco);
+}
+
+.favorito {
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--niebla);
+    color: var(--cereza);
+    font-size: 1.375rem;
+    line-height: 1;
+}
+
+.favorito:hover {
+    background-color: var(--rubor);
+}
+
+.vacio {
+    padding: 1.25rem 0;
+    color: var(--gris);
+}
+
+/* ===== 11. Mi pedido ===== */
+.pedido {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background-color: var(--niebla);
+}
+
+.lista-pedido {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.linea {
+    position: relative;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--blanco);
+}
+
+.linea-nombre {
+    display: block;
+    padding-right: 6rem;
+    font-weight: 600;
+}
+
+.linea-subtotal {
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    font-weight: 700;
+}
+
+.cantidad {
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+    border-radius: 999px;
+    background-color: var(--blanco);
+    vertical-align: middle;
+}
+
+.cantidad button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    color: var(--cafetal);
+    font-size: 1.25rem;
+}
+
+.cantidad button:hover {
+    background-color: var(--hoja);
+}
+
+.cantidad span {
+    display: inline-block;
+    min-width: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.quitar {
+    margin-top: 0.5rem;
+    border: none;
+    background-color: transparent;
+    color: var(--gris);
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    vertical-align: middle;
+}
+
+.quitar:hover {
+    color: var(--cereza);
+}
+
+.total {
+    margin: 1.25rem 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.acciones {
+    margin: 0;
+}
+
+.boton-secundario {
+    margin-right: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--gris);
+    border-radius: 999px;
+    background-color: transparent;
+    color: var(--tueste);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.boton-secundario:hover {
+    border-color: var(--cereza);
+    color: var(--cereza);
+}
