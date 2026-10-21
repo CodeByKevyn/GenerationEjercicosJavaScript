@@ -1,0 +1,20 @@
+root {
+  --bs-body-font-family: "Poppins", sans-serif;
+  --bs-primary: #6f4e37;
+  --bs-primary-rgb: 111, 78, 55;
+  --bs-primary-text-emphasis: #4a3223;
+  --bs-primary-bg-subtle: #f3e9e1;
+}
+
+.btn-primary {
+  --bs-btn-bg: #6f4e37;
+  --bs-btn-border-color: #6f4e37;
+  --bs-btn-hover-bg: #5a3e2b;
+  --bs-btn-hover-border-color: #5a3e2b;
+  --bs-btn-active-bg: #4a3223;
+  --bs-btn-active-border-color: #4a3223;
+}
+
+.navbar-brand .bi {
+  color: #d4a373;
+}

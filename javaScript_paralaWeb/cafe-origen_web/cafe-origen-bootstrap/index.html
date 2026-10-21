@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Café Origen · Café de especialidad</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#inicio">
+                <i class="bi bi-cup-hot-fill"></i> Café Origen
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuPrincipal">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#cafes">Nuestros cafés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pedidos">Pedidos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#preguntas">Preguntas</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER / BANNER -->
+    <header id="inicio" class="bg-primary text-white text-center py-5">
+        <div class="container py-lg-5">
+            <p class="text-uppercase small fw-semibold mb-2">Café de especialidad colombiano</p>
+            <h1 class="display-5 fw-bold">Del cultivo a tu taza en 48 horas</h1>
+            <p class="lead mb-4">Tostamos cada semana granos de pequeños caficultores del Huila, Nariño y Cauca.</p>
+            <a href="#pedidos" class="btn btn-light btn-lg m-1">Hacer un pedido</a>
+            <a href="#cafes" class="btn btn-outline-light btn-lg m-1">Ver cafés</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECCIÓN: NUESTROS CAFÉS -->
+        <section id="cafes" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-2">Nuestros cafés</h2>
+                <p class="text-center text-body-secondary mb-5">Bolsas de 250 g, en grano o molido.</p>
+
+                <div class="row g-4">
+                    <!-- Tarjeta 1: Huila -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <article class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <i class="bi bi-cup-hot fs-1 text-primary"></i>
+                                <h3 class="card-title h5 mt-3">Huila</h3>
+                                <p class="card-text">Notas a panela y frutos rojos. Acidez media y cuerpo sedoso.</p>
+                            </div>
+                            <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">$32.000</span>
+                                <a href="#pedidos" class="btn btn-primary btn-sm">Pedir</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Tarjeta 2: Nariño -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <article class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <i class="bi bi-cup-hot fs-1 text-primary"></i>
+                                <h3 class="card-title h5 mt-3">Nariño</h3>
+                                <p class="card-text">Notas cítricas y a caramelo. Acidez brillante y cuerpo ligero.</p>
+                            </div>
+                            <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">$35.000</span>
+                                <a href="#pedidos" class="btn btn-primary btn-sm">Pedir</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Tarjeta 3: Cauca -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <article class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <i class="bi bi-cup-hot fs-1 text-primary"></i>
+                                <h3 class="card-title h5 mt-3">Cauca</h3>
+                                <p class="card-text">Notas a chocolate y nuez. Cuerpo alto, ideal para el tinto.</p>
+                            </div>
+                            <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">$30.000</span>
+                                <a href="#pedidos" class="btn btn-primary btn-sm">Pedir</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: PEDIDOS -->
+        <section id="pedidos" class="py-5 bg-body-tertiary">
+            <div class="container">
+                <div class="row g-4">
+
+                    <!-- Info de contacto -->
+                    <div class="col-12 col-lg-5">
+                        <h2>Pide en línea</h2>
+                        <p class="text-body-secondary">Déjanos tus datos y te confirmamos por WhatsApp el mismo día.</p>
+                        <ul class="list-group">
+                            <li class="list-group-item"><i class="bi bi-clock me-2"></i>Lunes a sábado · 7:00 a. m. a 7:00 p. m.</li>
+                            <li class="list-group-item"><i class="bi bi-geo-alt me-2"></i>Calle 10 # 8-24, local 3</li>
+                            <li class="list-group-item"><i class="bi bi-whatsapp me-2"></i>300 123 4567</li>
+                        </ul>
+                    </div>
+
+                    <!-- Formulario -->
+                    <div class="col-12 col-lg-7">
+                        <form class="card p-4 shadow-sm">
+                            <div class="row g-3">
+                                <div class="col-md-8">
+                                    <label for="cafe" class="form-label fw-semibold">Café</label>
+                                    <select class="form-select" id="cafe" required>
+                                        <option value="" selected disabled>Elige un origen</option>
+                                        <option value="huila">Huila</option>
+                                        <option value="narino">Nariño</option>
+                                        <option value="cauca">Cauca</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="bolsas" class="form-label fw-semibold">Bolsas</label>
+                                    <input type="number" class="form-control" id="bolsas" min="1" value="1" required>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-primary w-100">Confirmar pedido</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <section id="preguntas" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Preguntas frecuentes</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <div class="accordion" id="acordeonPreguntas">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta1" aria-expanded="true" aria-controls="pregunta1">
+                    ¿Hacen envíos a otras ciudades?
+                  </button>
+                </h3>
+                <div id="pregunta1" class="accordion-collapse collapse show" data-bs-parent="#acordeonPreguntas">
+                  <div class="accordion-body">Sí. Enviamos a todo el país con transportadora y el envío se paga al recibir.</div>
+                </div>
+              </div>
+               <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta2" aria-expanded="false" aria-controls="pregunta2">
+                    ¿Cuánto dura el café después de abierto?
+                  </button>
+                </h3>
+                <div id="pregunta2" class="accordion-collapse collapse" data-bs-parent="#acordeonPreguntas">
+                  <div class="accordion-body">En grano, unas cuatro semanas en un frasco cerrado y lejos de la luz. Molido, unas dos semanas.</div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta3" aria-expanded="false" aria-controls="pregunta3">
+                    ¿Cómo puedo pagar?
+                  </button>
+                </h3>
+                <div id="pregunta3" class="accordion-collapse collapse" data-bs-parent="#acordeonPreguntas">
+                  <div class="accordion-body">Por transferencia bancaria o en efectivo contra entrega.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-dark text-white py-4">
+    <div class="container text-center d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <p class="mb-0">© 2026 Café Origen · Café de especialidad colombiano</p>
+      <div class="fs-4">
+        <a href="#" class="link-light me-3" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="link-light" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
