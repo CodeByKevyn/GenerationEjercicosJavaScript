@@ -417,3 +417,8 @@ section {
     border-color: var(--cereza);
     color: var(--cereza);
 }
+
+/* ===== 12. Repetir el último pedido ===== */
+.repetir {
+    margin-bottom: 0.5rem;
+}

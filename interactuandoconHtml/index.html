@@ -6,7 +6,7 @@
     <title>Café Origen | Café de especialidad</title>
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Young+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-   
+    <script src="app.js" defer></script>
 </head>
 <body>
     <header class="encabezado">
@@ -39,15 +39,17 @@
         <!-- Carta: JavaScript la llena con los productos -->
         <section id="carta" class="carta">
             <h2>La carta de hoy</h2>
-            <ul id="menu" class="menu"></ul>
             <p class="vistas">
                 <button id="ver-todo" class="vista activa" type="button">Toda la carta</button>
                 <button id="ver-favoritos" class="vista" type="button">♥ Favoritos (<span id="contador-favoritos">0</span>)</button>
             </p>
+            <ul id="menu" class="menu"></ul>
         </section>
+
         <!-- Pedido: JavaScript lo llena cada vez que la persona hace clic -->
         <section id="pedido" class="pedido">
             <h2>Mi pedido</h2>
+            <button id="repetir" class="boton-secundario repetir" type="button" hidden>↺ Repetir último pedido</button>
             <ul id="lista-pedido" class="lista-pedido"></ul>
             <p class="total">Total: <span id="total-pedido">$0</span></p>
             <p class="acciones">
@@ -72,6 +74,5 @@
         </address>
         <small>© 2026 Café Origen. Proyecto de clase.</small>
     </footer>
-     <script src="app.js" defer></script>
 </body>
 </html>

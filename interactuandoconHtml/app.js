@@ -1,24 +1,6 @@
-let favoritos = [];
-let vistaActual = "todo";
-
-function alternarFavorito(id) {
-    if (favoritos.includes(id)) {
-        favoritos = favoritos.filter((favorito) => favorito !== id);
-    } else {
-        favoritos.push(id);
-    }
-}
-
-const contadorFavoritos = document.querySelector("#contador-favoritos");
-const botonVerTodo = document.querySelector("#ver-todo");
-const botonVerFavoritos = document.querySelector("#ver-favoritos");// ===== Datos del negocio =====
+// ===== Datos del negocio =====
 const HORA_APERTURA = 7;
 const HORA_CIERRE = 19;
-const menu = document.querySelector("#menu");
-const listaPedido = document.querySelector("#lista-pedido");
-const contadorPedido = document.querySelector("#contador-pedido");
-const totalPedido = document.querySelector("#total-pedido");
-let pedido = [];
 
 const productos = [
     { id: 1, nombre: "Tinto campesino", descripcion: "Café filtrado en olla, suave y dulce.", precio: 3500 },
@@ -26,6 +8,12 @@ const productos = [
     { id: 3, nombre: "Filtrado de Nariño", descripcion: "Método V60, notas a panela y naranja.", precio: 9000 },
     { id: 4, nombre: "Pandebono recién horneado", descripcion: "Sale del horno cada hora.", precio: 4000 },
 ];
+
+// ===== Estado: lo que cambia mientras la persona usa la página =====
+let pedido = [];
+let favoritos = [];
+let vistaActual = "todo";
+let nombreCliente = "";
 
 // ===== Lógica del negocio =====
 function estaAbierto(hora) {
@@ -36,7 +24,127 @@ function formatearPrecio(valor) {
     return "$" + valor.toLocaleString("es-CO");
 }
 
+function buscarProducto(id) {
+    return productos.find((producto) => producto.id === id);
+}
+
+function buscarLinea(id) {
+    return pedido.find((linea) => linea.producto.id === id);
+}
+
+function agregarAlPedido(id) {
+    const linea = buscarLinea(id);
+
+    if (linea) {
+        linea.cantidad++;
+    } else {
+        pedido.push({ producto: buscarProducto(id), cantidad: 1 });
+    }
+}
+
+function quitarDelPedido(id) {
+    pedido = pedido.filter((linea) => linea.producto.id !== id);
+}
+
+function restarDelPedido(id) {
+    const linea = buscarLinea(id);
+    linea.cantidad--;
+
+    if (linea.cantidad === 0) {
+        quitarDelPedido(id);
+    }
+}
+
+function contarProductos() {
+    let cantidad = 0;
+    for (const linea of pedido) {
+        cantidad += linea.cantidad;
+    }
+    return cantidad;
+}
+
+function calcularTotal() {
+    let total = 0;
+    for (const linea of pedido) {
+        total += linea.producto.precio * linea.cantidad;
+    }
+    return total;
+}
+
+function alternarFavorito(id) {
+    if (favoritos.includes(id)) {
+        favoritos = favoritos.filter((favorito) => favorito !== id);
+    } else {
+        favoritos.push(id);
+    }
+}
+
+function resumirPedido(lineas) {
+    const resumen = [];
+    for (const linea of lineas) {
+        resumen.push({ id: linea.producto.id, cantidad: linea.cantidad });
+    }
+    return resumen;
+}
+
+function reconstruirPedido(resumen) {
+    const lineas = [];
+    for (const item of resumen) {
+        const producto = buscarProducto(item.id);
+        if (producto && item.cantidad > 0) {
+            lineas.push({ producto: producto, cantidad: item.cantidad });
+        }
+    }
+    return lineas;
+}
+
+// ===== Memoria del navegador: lo que sobrevive a la recarga =====
+const CLAVE_PEDIDO = "cafe-origen-pedido";
+const CLAVE_FAVORITOS = "cafe-origen-favoritos";
+const CLAVE_VISTA = "cafe-origen-vista";
+const CLAVE_NOMBRE = "cafe-origen-nombre";
+
+function guardar(clave, valor) {
+    localStorage.setItem(clave, JSON.stringify(valor));
+}
+
+function leer(clave, valorPorDefecto) {
+    const texto = localStorage.getItem(clave);
+
+    if (texto === null) {
+        return valorPorDefecto;
+    }
+
+    try {
+        return JSON.parse(texto);
+    } catch (error) {
+        console.warn("Dato dañado en", clave, "· se usa el valor por defecto");
+        return valorPorDefecto;
+    }
+}
+
+function guardarEstado() {
+    guardar(CLAVE_PEDIDO, resumirPedido(pedido));
+    guardar(CLAVE_FAVORITOS, favoritos);
+    guardar(CLAVE_NOMBRE, nombreCliente);
+}
+
+function cargarEstado() {
+    pedido = reconstruirPedido(leer(CLAVE_PEDIDO, []));
+    favoritos = leer(CLAVE_FAVORITOS, []).filter((id) => buscarProducto(id));
+    vistaActual = sessionStorage.getItem(CLAVE_VISTA) || "todo";
+    nombreCliente = leer(CLAVE_NOMBRE, "");
+}
+
 // ===== Elementos de la página =====
+const menu = document.querySelector("#menu");
+const listaPedido = document.querySelector("#lista-pedido");
+const contadorPedido = document.querySelector("#contador-pedido");
+const totalPedido = document.querySelector("#total-pedido");
+const contadorFavoritos = document.querySelector("#contador-favoritos");
+const botonVerTodo = document.querySelector("#ver-todo");
+const botonVerFavoritos = document.querySelector("#ver-favoritos");
+const botonVaciar = document.querySelector("#vaciar");
 const botonConfirmar = document.querySelector("#confirmar");
 
 // ===== Pintar: del estado a la pantalla =====
@@ -80,40 +188,10 @@ function mostrarCarta() {
 
     menu.innerHTML = html;
     contadorFavoritos.textContent = favoritos.length;
-}
-function buscarProducto(id) {
-    return productos.find((producto) => producto.id === id);
-}
-
-function buscarLinea(id) {
-    return pedido.find((linea) => linea.producto.id === id);
+    botonVerTodo.classList.toggle("activa", vistaActual === "todo");
+    botonVerFavoritos.classList.toggle("activa", vistaActual === "favoritos");
 }
 
-function agregarAlPedido(id) {
-    const linea = buscarLinea(id);
-
-    if (linea) {
-        linea.cantidad++;
-    } else {
-        pedido.push({ producto: buscarProducto(id), cantidad: 1 });
-    }
-}
-
-function contarProductos() {
-    let cantidad = 0;
-    for (const linea of pedido) {
-        cantidad += linea.cantidad;
-    }
-    return cantidad;
-}
-
-function calcularTotal() {
-    let total = 0;
-    for (const linea of pedido) {
-        total += linea.producto.precio * linea.cantidad;
-    }
-    return total;
-}
 function mostrarPedido() {
     let html = "";
 
@@ -140,39 +218,24 @@ function mostrarPedido() {
     totalPedido.textContent = formatearPrecio(calcularTotal());
 }
 
-function quitarDelPedido(id) {
-    pedido = pedido.filter((linea) => linea.producto.id !== id);
-}
-
-function restarDelPedido(id) {
-    const linea = buscarLinea(id);
-    linea.cantidad--;
-
-    if (linea.cantidad === 0) {
-        quitarDelPedido(id);
-    }
-}
-
 // ===== Eventos: lo que pasa cuando la persona actúa =====
-botonConfirmar.addEventListener("click", function () {
-    console.log("Clic en Confirmar pedido");
-    alert("¡Recibimos tu pedido!");
-});
-
-menu.addEventListener("click", function (evento) {
-    console.log("Clic en:", evento.target);
-    console.log("Acción:", evento.target.dataset.accion, "· id:", evento.target.dataset.id);
-});
-
 menu.addEventListener("click", function (evento) {
     const accion = evento.target.dataset.accion;
     const id = Number(evento.target.dataset.id);
 
     if (accion === "agregar") {
-    agregarAlPedido(id);
-    mostrarPedido();
-    console.log("Pedido:", pedido);
-}
+        agregarAlPedido(id);
+        mostrarPedido();
+        console.log("Pedido:", pedido);
+    }
+
+    if (accion === "favorito") {
+        alternarFavorito(id);
+        mostrarCarta();
+        console.log("Favoritos:", favoritos);
+    }
+
+    guardarEstado();
 });
 
 listaPedido.addEventListener("click", function (evento) {
@@ -189,10 +252,9 @@ listaPedido.addEventListener("click", function (evento) {
         quitarDelPedido(id);
     }
 
+    guardarEstado();
     mostrarPedido();
 });
-
-const botonVaciar = document.querySelector("#vaciar");
 
 botonVaciar.addEventListener("click", function () {
     if (pedido.length === 0) {
@@ -203,6 +265,7 @@ botonVaciar.addEventListener("click", function () {
 
     if (seguro) {
         pedido = [];
+        guardarEstado();
         mostrarPedido();
     }
 });
@@ -218,7 +281,7 @@ botonConfirmar.addEventListener("click", function () {
         return;
     }
 
-    const nombre = prompt("¿A nombre de quién va el pedido?");
+    const nombre = prompt("¿A nombre de quién va el pedido?", nombreCliente);
 
     if (nombre === null) {
         return;
@@ -229,16 +292,30 @@ botonConfirmar.addEventListener("click", function () {
         return;
     }
 
-    alert(`¡Gracias, ${nombre}!\nProductos: ${contarProductos()}\nTotal: ${formatearPrecio(calcularTotal())}\nTe llamamos por tu nombre cuando esté listo.`);
-    console.log("Pedido confirmado:", nombre, pedido);
+    nombreCliente = nombre.trim();
+
+    alert(`¡Gracias, ${nombreCliente}!\nProductos: ${contarProductos()}\nTotal: ${formatearPrecio(calcularTotal())}\nTe llamamos por tu nombre cuando esté listo.`);
+    console.log("Pedido confirmado:", nombreCliente, pedido);
 
     pedido = [];
+    guardarEstado();
     mostrarPedido();
 });
 
+botonVerTodo.addEventListener("click", function () {
+    vistaActual = "todo";
+    sessionStorage.setItem(CLAVE_VISTA, vistaActual);
+    mostrarCarta();
+});
 
+botonVerFavoritos.addEventListener("click", function () {
+    vistaActual = "favoritos";
+    sessionStorage.setItem(CLAVE_VISTA, vistaActual);
+    mostrarCarta();
+});
 
 // ===== Arranque =====
+cargarEstado();
 mostrarEstado();
 mostrarCarta();
 mostrarPedido();
