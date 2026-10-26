@@ -1,33 +1,13 @@
-// ===== Datos del negocio =====
-const HORA_APERTURA = 7;
-const HORA_CIERRE = 19;
-
-const productos = [
-    { id: 1, nombre: "Tinto campesino", descripcion: "Café filtrado en olla, suave y dulce.", precio: 3500 },
-    { id: 2, nombre: "Capuchino de la casa", descripcion: "Espresso de Huila con leche texturizada.", precio: 8500 },
-    { id: 3, nombre: "Filtrado de Nariño", descripcion: "Método V60, notas a panela y naranja.", precio: 9000 },
-    { id: 4, nombre: "Pandebono recién horneado", descripcion: "Sale del horno cada hora.", precio: 4000 },
-];
+// Los datos y las reglas del negocio están en negocio.js: index.html lo carga antes que este archivo.
 
 // ===== Estado: lo que cambia mientras la persona usa la página =====
 let pedido = [];
 let favoritos = [];
 let vistaActual = "todo";
 let nombreCliente = "";
+let ultimoPedido = [];
 
-// ===== Lógica del negocio =====
-function estaAbierto(hora) {
-    return hora >= HORA_APERTURA && hora < HORA_CIERRE;
-}
-
-function formatearPrecio(valor) {
-    return "$" + valor.toLocaleString("es-CO");
-}
-
-function buscarProducto(id) {
-    return productos.find((producto) => producto.id === id);
-}
-
+// ===== Acciones sobre el estado: cambian el pedido y los favoritos =====
 function buscarLinea(id) {
     return pedido.find((linea) => linea.producto.id === id);
 }
@@ -63,14 +43,6 @@ function contarProductos() {
     return cantidad;
 }
 
-function calcularTotal() {
-    let total = 0;
-    for (const linea of pedido) {
-        total += linea.producto.precio * linea.cantidad;
-    }
-    return total;
-}
-
 function alternarFavorito(id) {
     if (favoritos.includes(id)) {
         favoritos = favoritos.filter((favorito) => favorito !== id);
@@ -79,30 +51,12 @@ function alternarFavorito(id) {
     }
 }
 
-function resumirPedido(lineas) {
-    const resumen = [];
-    for (const linea of lineas) {
-        resumen.push({ id: linea.producto.id, cantidad: linea.cantidad });
-    }
-    return resumen;
-}
-
-function reconstruirPedido(resumen) {
-    const lineas = [];
-    for (const item of resumen) {
-        const producto = buscarProducto(item.id);
-        if (producto && item.cantidad > 0) {
-            lineas.push({ producto: producto, cantidad: item.cantidad });
-        }
-    }
-    return lineas;
-}
-
 // ===== Memoria del navegador: lo que sobrevive a la recarga =====
 const CLAVE_PEDIDO = "cafe-origen-pedido";
 const CLAVE_FAVORITOS = "cafe-origen-favoritos";
 const CLAVE_VISTA = "cafe-origen-vista";
 const CLAVE_NOMBRE = "cafe-origen-nombre";
+const CLAVE_ULTIMO_PEDIDO = "cafe-origen-ultimo-pedido";
 
 function guardar(clave, valor) {
     localStorage.setItem(clave, JSON.stringify(valor));
@@ -127,6 +81,7 @@ function guardarEstado() {
     guardar(CLAVE_PEDIDO, resumirPedido(pedido));
     guardar(CLAVE_FAVORITOS, favoritos);
     guardar(CLAVE_NOMBRE, nombreCliente);
+    guardar(CLAVE_ULTIMO_PEDIDO, ultimoPedido);
 }
 
 function cargarEstado() {
@@ -134,6 +89,7 @@ function cargarEstado() {
     favoritos = leer(CLAVE_FAVORITOS, []).filter((id) => buscarProducto(id));
     vistaActual = sessionStorage.getItem(CLAVE_VISTA) || "todo";
     nombreCliente = leer(CLAVE_NOMBRE, "");
+    ultimoPedido = leer(CLAVE_ULTIMO_PEDIDO, []);
 }
 
 // ===== Elementos de la página =====
@@ -141,9 +97,11 @@ const menu = document.querySelector("#menu");
 const listaPedido = document.querySelector("#lista-pedido");
 const contadorPedido = document.querySelector("#contador-pedido");
 const totalPedido = document.querySelector("#total-pedido");
+const descuentoPedido = document.querySelector("#descuento-pedido");
 const contadorFavoritos = document.querySelector("#contador-favoritos");
 const botonVerTodo = document.querySelector("#ver-todo");
 const botonVerFavoritos = document.querySelector("#ver-favoritos");
+const botonRepetir = document.querySelector("#repetir");
 const botonVaciar = document.querySelector("#vaciar");
 const botonConfirmar = document.querySelector("#confirmar");
 
@@ -215,7 +173,9 @@ function mostrarPedido() {
 
     listaPedido.innerHTML = html;
     contadorPedido.textContent = contarProductos();
-    totalPedido.textContent = formatearPrecio(calcularTotal());
+    descuentoPedido.textContent = formatearPrecio(calcularDescuento(calcularTotal(pedido)));
+    totalPedido.textContent = formatearPrecio(calcularTotalAPagar(pedido));
+    botonRepetir.hidden = ultimoPedido.length === 0;
 }
 
 // ===== Eventos: lo que pasa cuando la persona actúa =====
@@ -293,11 +253,26 @@ botonConfirmar.addEventListener("click", function () {
     }
 
     nombreCliente = nombre.trim();
+    ultimoPedido = resumirPedido(pedido);
 
-    alert(`¡Gracias, ${nombreCliente}!\nProductos: ${contarProductos()}\nTotal: ${formatearPrecio(calcularTotal())}\nTe llamamos por tu nombre cuando esté listo.`);
+    alert(`¡Gracias, ${nombreCliente}!\nProductos: ${contarProductos()}\nTotal: ${formatearPrecio(calcularTotalAPagar(pedido))}\nTe llamamos por tu nombre cuando esté listo.`);
     console.log("Pedido confirmado:", nombreCliente, pedido);
 
     pedido = [];
+    guardarEstado();
+    mostrarPedido();
+});
+
+botonRepetir.addEventListener("click", function () {
+    if (pedido.length > 0) {
+        const reemplazar = confirm("Tu último pedido va a reemplazar lo que tienes ahora en Mi pedido. ¿Continuamos?");
+
+        if (!reemplazar) {
+            return;
+        }
+    }
+
+    pedido = reconstruirPedido(ultimoPedido);
     guardarEstado();
     mostrarPedido();
 });
